@@ -5,23 +5,37 @@ class Enemy {
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
-    constructor(x, y) {
+    constructor(x, y, speed) {
     this.x = x;
     this.y = y;
     this.sprite = 'images/enemy-bug.png';
+    this.speed = speed;
 }
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+
+        if (this.x > 505) {
+            this.x = 100;
+            this.speed = 100;
+        }
     }
+
+    update(dt) {
+          
+          
+    
+        this.x += dt*this.speed;
+}
+      
 };
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
+// Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
-    // all computers.
-};
+//     // all computers.
+// };
 
 // Draw the enemy on the screen, required method for game
 /*Enemy.prototype.render = function() {
@@ -39,7 +53,7 @@ Enemy.prototype.update = function(dt) {
 
 var allEnemies = [];
  
-const enemy1 = new Enemy(100, 300);
+const enemy1 = new Enemy(100, 300, 50);
 allEnemies.push(enemy1);
 
 // This listens for key presses and sends the keys to your
