@@ -34,8 +34,8 @@ class Enemy {
 };
 
 
-/*class Player {
-    constructor(x = 300, y = 100) {
+class Player {
+    constructor(x = 202, y = 400) {
         this.x = x;
         this.y = y;
         this.sprite = 'images/char-boy.png';
@@ -44,8 +44,9 @@ class Enemy {
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 
+}}
 
-}*/
+const player = new Player();
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 // Enemy.prototype.update = function(dt) {
