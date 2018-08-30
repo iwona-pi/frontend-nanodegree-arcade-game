@@ -43,10 +43,16 @@ class Player {
 
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+}
+    handleInput(keyCode) {
 
-}}
+        if (keyCode == 'up') {
+            this.y = 300;
+        }
+    }
+}
 
-const player = new Player();
+var player = new Player();
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 // Enemy.prototype.update = function(dt) {
