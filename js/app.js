@@ -5,8 +5,8 @@ class Enemy {
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
-    constructor(x, y, speed) {
-    this.x = x;
+    constructor(y, speed) {
+    this.x = -101;
     this.y = y;
     this.sprite = 'images/enemy-bug.png';
     this.speed = speed;
@@ -14,21 +14,38 @@ class Enemy {
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 
-        if (this.x > 505) {
-            this.x = 100;
+       /* if (this.x > 505) {
+            this.x = -101;
             this.speed = 100;
-        }
+            this.y = r[Math.floor(Math.random()*3)]
+        }*/
     }
 
     update(dt) {
-          
-          
-    
+        
         this.x += dt*this.speed;
+        if (this.x > 505) {
+            this.x = -101;
+            this.speed = Math.floor(Math.random()*1200) + 30;
+            this.y = r[Math.floor(Math.random()*3)];
+        }
 }
       
 };
 
+
+/*class Player {
+    constructor(x = 300, y = 100) {
+        this.x = x;
+        this.y = y;
+        this.sprite = 'images/char-boy.png';
+    }
+
+    render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+
+
+}*/
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 // Enemy.prototype.update = function(dt) {
@@ -50,11 +67,15 @@ class Enemy {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-
+const r = [60,140,230];
 var allEnemies = [];
  
-const enemy1 = new Enemy(100, 300, 50);
+const enemy1 = new Enemy(r[Math.floor(Math.random()*3)], Math.floor(Math.random()*1200) + 30);
+const enemy3 = new Enemy(r[Math.floor(Math.random()*3)], Math.floor(Math.random()*1200) + 30);
+const enemy2 = new Enemy(r[Math.floor(Math.random()*3)], Math.floor(Math.random()*1200) + 30);
 allEnemies.push(enemy1);
+allEnemies.push(enemy2);
+allEnemies.push(enemy3);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
@@ -68,3 +89,4 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
