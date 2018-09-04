@@ -59,6 +59,18 @@ class Player {
             this.x -= 100;
         }
     }
+
+    update() {
+        let t = this.x - enemy1.x;
+        if (this.y === enemy1.y &&  t >= -73 && t <= 73 ) {
+            setTimeout(function() {player.y = 400, player.x = 202}, 300);
+        }
+        /*for (var item of allEnemies) {
+            if (player.y = item.y) {
+                this.y = 400;
+            }
+        }*/
+    }
 }
 
 var player = new Player();
@@ -83,15 +95,16 @@ var player = new Player();
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-const r = [60,140,230];
+const r = [60,145,230];
 var allEnemies = [];
  
-const enemy1 = new Enemy(r[Math.floor(Math.random()*3)], Math.floor(Math.random()*1200) + 30);
-const enemy3 = new Enemy(r[Math.floor(Math.random()*3)], Math.floor(Math.random()*1200) + 30);
+const enemy1 = new Enemy(r[Math.floor(Math.random()*3)], 20);
+    // Math.floor(Math.random()*1200) + 30);
+/*const enemy3 = new Enemy(r[Math.floor(Math.random()*3)], Math.floor(Math.random()*1200) + 30);
 const enemy2 = new Enemy(r[Math.floor(Math.random()*3)], Math.floor(Math.random()*1200) + 30);
-allEnemies.push(enemy1);
-allEnemies.push(enemy2);
 allEnemies.push(enemy3);
+allEnemies.push(enemy2);*/
+allEnemies.push(enemy1);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
