@@ -65,6 +65,13 @@ class Player {
         if (this.y === enemy1.y &&  t >= -73 && t <= 73 ) {
             setTimeout(function() {player.y = 400, player.x = 202}, 300);
         }
+
+        if (this.y === -25) {
+            setTimeout(function()
+            {player.x = 202,
+            player.y = 400,
+            player.sprite = 'images/char-cat-girl.png'},
+        200)}
         /*for (var item of allEnemies) {
             if (player.y = item.y) {
                 this.y = 400;
