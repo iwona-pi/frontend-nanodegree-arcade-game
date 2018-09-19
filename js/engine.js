@@ -140,6 +140,8 @@ var Engine = (function(global) {
         }
 
         renderEntities();
+
+
     }
 
     /* This function is called by the render function and is called on each game
@@ -155,6 +157,12 @@ var Engine = (function(global) {
         });
 
         player.render();
+
+        if (player.sprite === 'images/char-cat-girl.png') {
+            Rock1.render();
+        }
+
+        
     }
 
     /* This function does nothing but it could have been a good place to
@@ -163,6 +171,7 @@ var Engine = (function(global) {
      */
     function reset() {
         // noop
+
     }
 
     /* Go ahead and load all of the images we know we're going to need to
@@ -175,7 +184,8 @@ var Engine = (function(global) {
         'images/grass-block.png',
         'images/enemy-bug.png',
         'images/char-boy.png',
-        'images/char-cat-girl.png'
+        'images/char-cat-girl.png',
+        'images/Rock.png',
     ]);
     Resources.onReady(init);
 
