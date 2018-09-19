@@ -74,10 +74,16 @@ class Player {
     }
 
     update() {
-        let t = this.x - enemy1.x;
+        /*let t = this.x - enemy1.x;
         if (this.y === enemy1.y &&  t >= -73 && t <= 73 ) {
             setTimeout(function() {player.y = 400, player.x = 202}, 300);
-        }
+        }*/
+        for (let enemy of allEnemies) {
+            let t = this.x - enemy.x;
+            if (this.y === enemy.y &&  t >= -73 && t <= 73 ) {
+            setTimeout(function() {player.y = 400, player.x = 202}, 300);
+        }}
+
 
         if (this.y === -25) {
             // Rock1.render();
