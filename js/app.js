@@ -1,50 +1,46 @@
 // Enemies our player must avoid
 class Enemy {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
+   
     constructor(y, speed) {
     this.x = -101;
     this.y = y;
     this.sprite = 'images/enemy-bug.png';
     this.speed = speed;
-}
+    }
+    // This function draws our bug's images on the canvas
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-
-       if (this.x > 505) {
-            this.x = -101;
-            this.speed = 100;
-            this.y = r[Math.floor(Math.random()*3)]
-        }
     }
 
+    // Let's move our enemies...
     update(dt) {
         
         this.x += dt*this.speed;
+        // and back them to start position when they rich the end of the canvas
         if (this.x > 505) {
             this.x = -101;
             this.speed = Math.floor(Math.random()*1200) + 30;
             this.y = r[Math.floor(Math.random()*3)];
         }
+    }
 }
-      
-};
 
-
+// It is time to create Player class...
 class Player {
     constructor(x = 202, y = 400) {
         this.x = x;
         this.y = y;
         this.sprite = 'images/char-boy.png';
     }
-
+    // and set the image of the boy on the start position
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+    }   
+    // Short instruction to our Player how to move on
     handleInput(keyCode) {
+        
+        // The code above is working when player first time rich the water.
+        // It is prevent Player to move across the rock image.
         if (this.sprite === 'images/char-cat-girl.png') {
             if (keyCode === 'up' && this.y === 230 && this.x === 202) {
             keyCode = 'none';
@@ -68,93 +64,62 @@ class Player {
         }
         if (keyCode === 'left' && this.x >2) {
             this.x -= 100;
-        }
-
-        
+        }      
     }
 
+    // This function updates player position when something happend!
     update() {
-        /*let t = this.x - enemy1.x;
-        if (this.y === enemy1.y &&  t >= -73 && t <= 73 ) {
-            setTimeout(function() {player.y = 400, player.x = 202}, 300);
-        }*/
+        // When enemies nad player met face to face (collision!), the second one 
+        // have to comes back to start position. 
         for (let enemy of allEnemies) {
             let t = this.x - enemy.x;
             if (this.y === enemy.y &&  t >= -73 && t <= 73 ) {
-            setTimeout(function() {player.y = 400, player.x = 202}, 300);
+            setTimeout(function() {player.y = 400, player.x = 202}, 100);
         }}
 
-
+        // When player richs the water (cool!) for the first time it also comes back to start position but
+        // in completely different image.
         if (this.y === -25) {
-            // Rock1.render();
-            setTimeout(function()
-            {player.x = 202,
-            player.y = 400,
-            player.sprite = 'images/char-cat-girl.png',
-            Rock1.render()
-            },
 
-
-
-        200)}
-        /*for (var item of allEnemies) {
-            if (player.y = item.y) {
-                this.y = 400;
-            }
-        }*/
+            setTimeout(function() {
+                player.x = 202,
+                player.y = 400,
+                player.sprite = 'images/char-cat-girl.png',
+                Rock1.render()
+                },
+            
+            200)} 
     }
 }
 
-
+// And last but not least - Rock class. 
 class Rock {
     constructor(x, y) {
         this.x = x;
         this.y = y;
         this.sprite = 'images/Rock.png';
     }
+    // Draw rock image on the canvas.
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
 }
 
-var player = new Player();
-var Rock1 = new Rock(202,140);
+
+const player = new Player();
+const Rock1 = new Rock(202,140); // instantiate rock object with the given position
+const r = [60,145,230]; // this array holds three possible y-position (number of pixels) of the enemies
+const allEnemies = [];
+// Instantiate three enemy objects with random position and random speed.
+const enemy1 = new Enemy(r[Math.floor(Math.random()*3)], Math.floor(Math.random()*1200) + 100);
+const enemy3 = new Enemy(r[Math.floor(Math.random()*3)], Math.floor(Math.random()*1200) + 150);
+const enemy2 = new Enemy(r[Math.floor(Math.random()*3)], Math.floor(Math.random()*1200) + 200);
+
+allEnemies.push(enemy1, enemy2, enemy3);
 
 
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
-// Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-//     // all computers.
-// };
 
-// Draw the enemy on the screen, required method for game
-/*Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};*/
-
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
-
-
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
-const r = [60,145,230];
-var allEnemies = [];
- 
-const enemy1 = new Enemy(r[Math.floor(Math.random()*3)], 20);
-    // Math.floor(Math.random()*1200) + 30);
-const enemy3 = new Enemy(r[Math.floor(Math.random()*3)], Math.floor(Math.random()*1200) + 30);
-const enemy2 = new Enemy(r[Math.floor(Math.random()*3)], Math.floor(Math.random()*1200) + 30);
-allEnemies.push(enemy3);
-allEnemies.push(enemy2);
-allEnemies.push(enemy1);
-
-// This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+// This listens for key presses and sends the keys to Player.handleInput() method. 
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',
