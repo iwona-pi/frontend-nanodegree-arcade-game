@@ -14,11 +14,11 @@ class Enemy {
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 
-       /* if (this.x > 505) {
+       if (this.x > 505) {
             this.x = -101;
             this.speed = 100;
             this.y = r[Math.floor(Math.random()*3)]
-        }*/
+        }
     }
 
     update(dt) {
@@ -45,6 +45,17 @@ class Player {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
     handleInput(keyCode) {
+        if (this.sprite === 'images/char-cat-girl.png') {
+            if (keyCode === 'up' && this.y === 230 && this.x === 202) {
+            keyCode = 'none';
+            } if (keyCode === 'left' && this.y === 145 && this.x === 302) {
+                keyCode = 'none';
+            } if (keyCode === 'down' && this.y === 60 && this.x === 202) {
+                keyCode = 'none';
+            } if (keyCode === 'right' && this.y === 145 && this.x === 102) {
+                keyCode = 'none';
+            }
+        }
 
         if (keyCode === 'up' && this.y > -25) {
             this.y -= 85;
@@ -58,6 +69,8 @@ class Player {
         if (keyCode === 'left' && this.x >2) {
             this.x -= 100;
         }
+
+        
     }
 
     update() {
@@ -67,10 +80,16 @@ class Player {
         }
 
         if (this.y === -25) {
+            // Rock1.render();
             setTimeout(function()
             {player.x = 202,
             player.y = 400,
-            player.sprite = 'images/char-cat-girl.png'},
+            player.sprite = 'images/char-cat-girl.png',
+            Rock1.render()
+            },
+
+
+
         200)}
         /*for (var item of allEnemies) {
             if (player.y = item.y) {
@@ -80,7 +99,22 @@ class Player {
     }
 }
 
+
+class Rock {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.sprite = 'images/Rock.png';
+    }
+    render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+}
+
 var player = new Player();
+var Rock1 = new Rock(202,140);
+
+
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 // Enemy.prototype.update = function(dt) {
@@ -107,10 +141,10 @@ var allEnemies = [];
  
 const enemy1 = new Enemy(r[Math.floor(Math.random()*3)], 20);
     // Math.floor(Math.random()*1200) + 30);
-/*const enemy3 = new Enemy(r[Math.floor(Math.random()*3)], Math.floor(Math.random()*1200) + 30);
+const enemy3 = new Enemy(r[Math.floor(Math.random()*3)], Math.floor(Math.random()*1200) + 30);
 const enemy2 = new Enemy(r[Math.floor(Math.random()*3)], Math.floor(Math.random()*1200) + 30);
 allEnemies.push(enemy3);
-allEnemies.push(enemy2);*/
+allEnemies.push(enemy2);
 allEnemies.push(enemy1);
 
 // This listens for key presses and sends the keys to your
