@@ -1,11 +1,11 @@
 // Enemies our player must avoid
 class Enemy {
    
-    constructor(y, speed) {
+    constructor() {
     this.x = -101;
-    this.y = y;
+    this.y = r[Math.floor(Math.random()*3)];
     this.sprite = 'images/enemy-bug.png';
-    this.speed = speed;
+    this.speed = Math.floor(Math.random()*1200) + 200;
     }
     // This function draws our bug's images on the canvas
     render() {
@@ -19,7 +19,7 @@ class Enemy {
         // and back them to start position when they rich the end of the canvas
         if (this.x > 505) {
             this.x = -101;
-            this.speed = Math.floor(Math.random()*1200) + 30;
+            this.speed = Math.floor(Math.random()*1200) + 200;
             this.y = r[Math.floor(Math.random()*3)];
         }
     }
@@ -84,8 +84,7 @@ class Player {
             setTimeout(function() {
                 player.x = 202,
                 player.y = 400,
-                player.sprite = 'images/char-cat-girl.png',
-                Rock1.render()
+                player.sprite = 'images/char-cat-girl.png'
                 },
             
             200)} 
@@ -111,10 +110,9 @@ const Rock1 = new Rock(202,140); // instantiate rock object with the given posit
 const r = [60,145,230]; // this array holds three possible y-position (number of pixels) of the enemies
 const allEnemies = [];
 // Instantiate three enemy objects with random position and random speed.
-const enemy1 = new Enemy(r[Math.floor(Math.random()*3)], Math.floor(Math.random()*1200) + 100);
-const enemy3 = new Enemy(r[Math.floor(Math.random()*3)], Math.floor(Math.random()*1200) + 150);
-const enemy2 = new Enemy(r[Math.floor(Math.random()*3)], Math.floor(Math.random()*1200) + 200);
-
+const enemy1 = new Enemy();
+const enemy3 = new Enemy();
+const enemy2 = new Enemy();
 allEnemies.push(enemy1, enemy2, enemy3);
 
 
