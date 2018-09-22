@@ -2,7 +2,7 @@ class ObjectGame {
     constructor(x,y) {
         this.x = x;
         this.y = y;
-        this.sprite = 'images/enemy-bug.png';
+        this.sprite = 'images/char-boy.png';
     }
 
     render() {
@@ -104,16 +104,17 @@ class Player extends ObjectGame{
 }
 
 // And last but not least - Rock class. 
-class Rock {
+class Rock extends ObjectGame{
     constructor(x, y) {
-        this.x = x;
-        this.y = y;
+        super(x,y)
+       /* this.x = x;
+        this.y = y;*/
         this.sprite = 'images/Rock.png';
     }
     // Draw rock image on the canvas.
-    render() {
+    /*render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    }
+    }*/
 }
 
 
