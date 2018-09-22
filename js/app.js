@@ -1,3 +1,4 @@
+// This parent class is helpful to not repeat some properties and functions.
 class ObjectGame {
     constructor(x,y) {
         this.x = x;
@@ -11,18 +12,14 @@ class ObjectGame {
 }
 // Enemies our player must avoid
 class Enemy extends ObjectGame {
-   constructor(){
+    constructor() {
     super() 
-    this.x = -101;
-    this.y = r[Math.floor(Math.random()*3)];
-    this.sprite = 'images/enemy-bug.png';
-    this.speed = Math.floor(Math.random()*1200) + 200;
+        this.x = -101;
+        this.y = r[Math.floor(Math.random()*3)];
+        this.sprite = 'images/enemy-bug.png';
+        this.speed = Math.floor(Math.random()*1200) + 200;
     }
-    // This function draws our bug's images on the canvas
-    /*render() {
-        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    }*/
-    // super.render();
+    
     // Let's move our enemies...
     update(dt) {
         
@@ -44,15 +41,12 @@ class Player extends ObjectGame{
         this.y = 400;
         this.sprite = 'images/char-boy.png';
     }
-    // and set the image of the boy on the start position
-    /*render() {
-        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    }   */
+   
     // Short instruction to our Player how to move on
     handleInput(keyCode) {
         
         // The code above is working when player first time rich the water.
-        // It is prevent Player to move across the rock image.
+        // It prevents Player to move across the rock image.
         if (this.sprite === 'images/char-cat-girl.png') {
             if (keyCode === 'up' && this.y === 230 && this.x === 202) {
             keyCode = 'none';
@@ -81,7 +75,7 @@ class Player extends ObjectGame{
 
     // This function updates player position when something happend!
     update() {
-        // When enemies nad player met face to face (collision!), the second one 
+        // When enemies and player meet face to face (collision!), the second one 
         // have to comes back to start position. 
         for (let enemy of allEnemies) {
             let t = this.x - enemy.x;
@@ -103,18 +97,12 @@ class Player extends ObjectGame{
     }
 }
 
-// And last but not least - Rock class. 
+// And last but not least - Rock class. It is used to draw the stone.
 class Rock extends ObjectGame{
     constructor(x, y) {
         super(x,y)
-       /* this.x = x;
-        this.y = y;*/
         this.sprite = 'images/Rock.png';
     }
-    // Draw rock image on the canvas.
-    /*render() {
-        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    }*/
 }
 
 
@@ -123,7 +111,6 @@ const Rock1 = new Rock(202,140); // instantiate rock object with the given posit
 const r = [60,145,230]; // this array holds three possible y-position (number of pixels) of the enemies
 const allEnemies = [];
 // Instantiate three enemy objects with random position and random speed.
-var x = -101;
 const enemy1 = new Enemy();
 const enemy3 = new Enemy();
 const enemy2 = new Enemy();
