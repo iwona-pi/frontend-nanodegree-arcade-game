@@ -1,17 +1,28 @@
+class ObjectGame {
+    constructor(x,y) {
+        this.x = x;
+        this.y = y;
+        this.sprite = 'images/enemy-bug.png';
+    }
+
+    render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+}
 // Enemies our player must avoid
-class Enemy {
-   
-    constructor() {
+class Enemy extends ObjectGame {
+   constructor(){
+    super() 
     this.x = -101;
     this.y = r[Math.floor(Math.random()*3)];
     this.sprite = 'images/enemy-bug.png';
     this.speed = Math.floor(Math.random()*1200) + 200;
     }
     // This function draws our bug's images on the canvas
-    render() {
+    /*render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    }
-
+    }*/
+    // super.render();
     // Let's move our enemies...
     update(dt) {
         
@@ -26,16 +37,17 @@ class Enemy {
 }
 
 // It is time to create Player class...
-class Player {
-    constructor(x = 202, y = 400) {
-        this.x = x;
-        this.y = y;
+class Player extends ObjectGame{
+    constructor() {
+    super() 
+        this.x = 202;
+        this.y = 400;
         this.sprite = 'images/char-boy.png';
     }
     // and set the image of the boy on the start position
-    render() {
+    /*render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    }   
+    }   */
     // Short instruction to our Player how to move on
     handleInput(keyCode) {
         
@@ -110,6 +122,7 @@ const Rock1 = new Rock(202,140); // instantiate rock object with the given posit
 const r = [60,145,230]; // this array holds three possible y-position (number of pixels) of the enemies
 const allEnemies = [];
 // Instantiate three enemy objects with random position and random speed.
+var x = -101;
 const enemy1 = new Enemy();
 const enemy3 = new Enemy();
 const enemy2 = new Enemy();
